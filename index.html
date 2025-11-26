@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teja Kutchula - UI/UX Developer & Designer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #0099ff;
+            --dark-bg: #0a0e27;
+            --card-bg: #151932;
+            --text-light: #e0e6f0;
+            --text-muted: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-circles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-duration: 25s;
+        }
+
+        .circle:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            right: 10%;
+            animation-duration: 30s;
+            animation-delay: 5s;
+        }
+
+        .circle:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: 10%;
+            left: 50%;
+            animation-duration: 20s;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: all 0.3s;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            margin: 0 1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 50px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 12px 35px;
+            font-size: 1rem;
+            border-radius: 30px;
+            color: #fff;
+            transition: all 0.3s;
+            margin-right: 1rem;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary-custom {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            padding: 10px 35px;
+            font-size: 1rem;
+            border-radius: 30px;
+            color: var(--primary-color);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary-custom:hover {
+            background: var(--primary-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .code-snippet {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-snippet .keyword {
+            color: #ff6b9d;
+        }
+
+        .code-snippet .function {
+            color: #c792ea;
+        }
+
+        .code-snippet .string {
+            color: #a5e844;
+        }
+
+        .code-snippet .comment {
+            color: var(--text-muted);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+        }
+
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .skills-category {
+            margin-bottom: 2rem;
+        }
+
+        .skills-category h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: var(--card-bg);
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 100px 0;
+        }
+
+        .project-category-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-badge {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .project-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-right: 1rem;
+            transition: all 0.3s;
+        }
+
+        .project-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Resume Section */
+        .resume-section {
+            padding: 100px 0;
+        }
+
+        .resume-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .resume-card h3 {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .resume-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .highlight-item i {
+            color: var(--primary-color);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            height: 100%;
+        }
+
+        .contact-form .form-control {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form .form-control:focus {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.25);
+        }
+
+        .contact-form input::placeholder {
+            color: white;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+        }
+
+        .contact-form textarea::placeholder {
+            color: white;
+        }
+
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .contact-info-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-info-item i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+        }
+
+        .contact-info-item a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 14, 39, 0.95);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #00d8ff;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .code-snippet {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Teja Kutchula</h1>
+                    <h2>UI/UX Developer & Designer</h2>
+                    <p>Fresher UI/UX Designer passionate about creating smooth and user-focused digital experiences. I
+                        love turning ideas into clean, functional, and visually appealing interfaces using modern design
+                        tools and creative thinking.</p>
+                    <div class="mt-4">
+                        <a href="#projects" class="btn btn-primary-custom">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary-custom">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="code-snippet">
+                        <div><span class="keyword">const</span> <span class="function">developer</span> = <span
+                                class="string">"passionate"</span>;</div>
+                        <div class="mt-2"><span class="keyword">function</span> <span
+                                class="function">createAmazingApps</span>() {</div>
+                        <div class="ms-4"><span class="comment">// Building the future</span></div>
+                        <div class="ms-4"><span class="keyword">return</span> <span class="string">"innovation"</span>;
+                        </div>
+                        <div>}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <p>I'm a passionate Fresher UI/UX Developer & Designer eager to craft meaningful digital
+                            interfaces and web experiences. I enjoy working with modern UI tools and front-end
+                            technologies, particularly React and JavaScript frameworks, while continuously learning new
+                            trends to improve my design and development skills.</p>
+                        <p>When I'm not designing or coding, I love exploring creative UI patterns, learning from
+                            open-source projects, and sharing my knowledge through small notes, mini-projects, and
+                            online discussions.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="skills-category">
+                                <h4><i class="fas fa-code me-2"></i>Development Skills</h4>
+                                <div>
+                                    <span class="skill-tag">HTML5</span>
+                                    <span class="skill-tag">CSS3</span>
+                                    <span class="skill-tag">Bootstrap</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">React.js</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="skills-category">
+                                <h4><i class="fas fa-palette me-2"></i>Design Skills</h4>
+                                <div>
+                                    <span class="skill-tag">Figma</span>
+                                    <span class="skill-tag">Canva</span>
+                                    <span class="skill-tag">Photoshop</span>
+                                    <span class="skill-tag">Prototyping</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+
+            <!-- Technical Projects -->
+            <h3 class="project-category-title"><i class="fas fa-code me-2"></i>Technical Projects</h3>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://t3.ftcdn.net/jpg/03/38/79/70/360_F_338797073_CsO0jjvg8f8E9WqPJJn072tBwYrsFOcH.jpg" alt="weddingphotography">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">weddingphotography</h3>
+                            <p class="project-description">Wedding photography portfolio highlighting romantic visuals and traditional ceremonies.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">React</span>
+                                <span class="tech-badge">js</span>
+                                <span class="tech-badge">Bootstrap</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://weddingphotography1.netlify.app/"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                <a href="https://github.com/teja143kt"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/050/393/628/small/cute-curious-gray-and-white-kitten-in-a-long-shot-photo.jpg" alt="weddingphotography">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Cat Photo Gallery</h3>
+                            <p class="project-description">Created a minimalist cat photo gallery highlighting various moods, breeds, and candid cat expressions.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML</span>
+                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://teja143kt.github.io/cat.html/"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                <a href="https://github.com/teja143kt"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.pexels.com/photos/325690/pexels-photo-325690.jpeg?_gl=1*tqssrq*_ga*MjgxMDU3OTk2LjE3NDc2MzIwOTc.*_ga_8JE65Q40S6*czE3NjQxNzAzNjYkbzIkZzAkdDE3NjQxNzAzNjYkajYwJGwwJGgw" alt="weddingphotography">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Baby care</h3>
+                            <p class="project-description">A gentle and nurturing baby care service focused on health, comfort, routine, and early development.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">Bootstrap</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://teja143kt.github.io/Baby-care/"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                <a href="https://github.com/teja143kt"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design Projects -->
+            <h3 class="project-category-title mt-5"><i class="fas fa-palette me-2"></i>Design Projects</h3>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://img.pikbest.com/png-images/20240802/fresh-tasty-burger_10696008.png!sw800" alt="weddingphotography">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Delicious Burger</h3>
+                            <p class="project-description">A perfectly grilled, cheesy, and delicious burger that melts in every bite.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Figma</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://www.figma.com/design/qXkL8QuNUfWvWkOvs9rd59/projects?node-id=0-1&t=sCYLih0rAgwJYmei-1"><i class="fas fa-external-link-alt"></i> View Design</a>
+                                <a href="https://www.figma.com/files/team/1523920756247439169/recents-and-sharing?fuid=1523920753338944912"><i class="fab fa-figma"></i> Figma File</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">SaaS Dashboard Design</h3>
+                            <p class="project-description">Complete dashboard redesign for a SaaS platform, focusing on
+                                data visualization and user experience optimization.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Figma</span>
+                                <span class="tech-badge">Photoshop</span>
+                                <span class="tech-badge">UI Design</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#"><i class="fas fa-external-link-alt"></i> View Design</a>
+                                <a href="#"><i class="fab fa-figma"></i> Figma File</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Brand Identity Design</h3>
+                            <p class="project-description">Complete brand identity package including logo design, color
+                                palette, typography, and brand guidelines for startups.</p>
+                            <div class="project-tech">
+                                <span class="tech-badge">Photoshop</span>
+                                <span class="tech-badge">Canva</span>
+                                <span class="tech-badge">Branding</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#"><i class="fas fa-external-link-alt"></i> View Portfolio</a>
+                                <a href="#"><i class="fas fa-file-pdf"></i> Case Study</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume-section">
+        <div class="container">
+            <h2 class="section-title">Resume</h2>
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <div class="resume-card">
+                        <h3>Download Resume</h3>
+                        <p>Get a complete overview of my experience, skills, and achievements.</p>
+                        <a href="https://drive.google.com/file/d/1Vr4q7vLeM7gwxw5EAvCHvX-rLNwGZg0a/view?usp=drivesdk"
+                            class="btn btn-primary-custom">
+                            <i class="fas fa-download me-2"></i>Download PDF
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="resume-card">
+                        <h3>Key Highlights</h3>
+
+                        <div class="highlight-item">
+                            <i class="fas fa-rocket"></i>
+                            <div>
+                                <strong>Designed UI layouts and wireframes for mini projects</strong><br>
+                                Hands-on practice with personal and academic projects
+                            </div>
+                        </div>
+
+                        <div class="highlight-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <div>
+                                <strong>Focused on clean, responsive and user-friendly UI</strong><br>
+                                Skilled in Figma, prototypes, and visual design improvements
+                            </div>
+                        </div>
+
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <strong>Collaborated with peers on small web/app designs</strong><br>
+                                Open to learning and working with real product teams
+                            </div>
+                        </div>
+
+                        <div class="highlight-item">
+                            <i class="fas fa-code-branch"></i>
+                            <div>
+                                <strong>Practicing React & frontend development skills</strong><br>
+                                Building UI components and reusable design patterns
+                            </div>
+                        </div>
+
+                        <div class="highlight-item">
+                            <i class="fas fa-award"></i>
+                            <div>
+                                <strong>Completed UI/UX design learning & certification</strong><br>
+                                Knowledge of user research, prototyping & usability principles
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="contact-card">
+                        <h3 class="mb-4">Get in Touch</h3>
+                        <p class="mb-4">I'm always interested in hearing about new opportunities and exciting projects.
+                            Let's discuss how we can work together!</p>
+                        <form class="contact-form">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="btn btn-primary-custom">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-card">
+                        <h3 class="mb-4">Contact Information</h3>
+                        <div class="contact-info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Phone</strong><br>
+                                <a href="tel:+916302233031">+91 63022 33031</a>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong><br>
+                                <a href="mailto:tejakutchula@gmail.com">tejakutchula@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Location</strong><br>
+                                Visakhapatnam, India
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="mb-3">Connect on Social Media</h5>
+                            <div class="social-links">
+                                <a href="https://github.com/teja143kt" class="social-link" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/tejakutchula" class="social-link" title="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Teja Kutchula. All rights reserved.</p>
+        <p>
+            <a href="https://www.linkedin.com/in/tejakutchula">LinkedIn</a> |
+            <a href="https://github.com/teja143kt">GitHub</a>
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
